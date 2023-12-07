@@ -19,6 +19,7 @@ function App() {
     return currentUser ? children : <Navigate to="/login" />;
   };
 
+  console.log("Iniciando renderização do App");
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
