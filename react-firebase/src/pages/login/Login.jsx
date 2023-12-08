@@ -14,19 +14,18 @@ const Login = () => {
 
   const {dispatch} = useContext(AuthContext)
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch({type:"LOGIN", payload:user})
-        navitage("/")
-      })
-      .catch((error) => {
-        setError(true);
-      });
+  
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      dispatch({ type: "LOGIN", payload: user });
+      navitage("/");
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
